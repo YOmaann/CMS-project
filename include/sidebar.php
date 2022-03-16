@@ -4,7 +4,7 @@
 <div class="well">
 
     <h4>Blog Search</h4>
-    <form action="" method="GET">
+    <form action="search.php" method="GET">
     <div class="input-group">
         <input name="search" type="text" class="form-control">
         <span class="input-group-btn">
