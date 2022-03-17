@@ -1,6 +1,7 @@
 <?php
 
 include "./include/header.php";
+include "./include/navigation.php";
 include "./include/sidebar.php";
 ?>
 
@@ -12,17 +13,12 @@ include "./include/sidebar.php";
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Blank Page
-                            <small>Subheading</small>
+                            Welcome to Admin
+                            <small>Author</small>
                         </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
+                        <div>
+                            
+                        </div>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -36,5 +32,4 @@ include "./include/sidebar.php";
     </div>
 <?php
 include "./include/footer.php";
-
 ?>
