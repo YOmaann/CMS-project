@@ -1,5 +1,6 @@
 <?php
 
+ob_start(); // stores the output in a buffer before sending to the client.
 include "../include/db.php";
 
 ?>

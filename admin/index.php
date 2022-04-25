@@ -1,8 +1,8 @@
 <?php
 
-include "./include/header.php";
-include "./include/navigation.php";
-include "./include/sidebar.php";
+include "./include/admin_header.php";
+include "./include/admin_navigation.php";
+include "./include/admin_sidebar.php";
 
 // if($connection) echo "Connected!"; else echo " Not connected!";
 ?>
@@ -33,5 +33,5 @@ include "./include/sidebar.php";
 
     </div>
 <?php
-include "./include/footer.php";
+include "./include/admin_footer.php";
 ?>
