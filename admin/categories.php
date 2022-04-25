@@ -3,8 +3,6 @@
 include "./include/header.php";
 include "./include/navigation.php";
 include "./include/sidebar.php";
-
-// if($connection) echo "Connected!"; else echo " Not connected!";
 ?>
 
         <div id="page-wrapper">
