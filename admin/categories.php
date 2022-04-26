@@ -40,8 +40,8 @@ update_categories();
                                  <label for="cat-title">Edit Category</label>
 
                                  <?php
-
-                                 edit_categories();
+                                 $edit_cat_id = $_GET['edit'];
+                                 $edit_cat_title = edit_categories();
 
 
 ?>

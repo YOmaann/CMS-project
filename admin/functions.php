@@ -23,25 +23,27 @@ function insert_categories() {
 function update_categories() {
     global $connection;
     if(isset($_POST['update'])) {
+        // echo "Hello";
         $the_cat_title = $_POST['edit_cat_title'];
         $the_cat_id = $_POST['edit_cat_id'];
         $query = "UPDATE categories SET cat_title='$the_cat_title' where cat_id=$the_cat_id";
         $result  = mysqli_query($connection, $query);
     
         if($result) echo "Updated values successfully!";
+        else echo "Something went wrong! <br>".mysqli_error($connection);
         // header("Location: categories.php");
     }
 }
 
 function edit_categories() {
-    global $connection;
+    global $connection, $edit_cat_id;
     if(isset($_GET['edit'])){
-        $edit_cat_id = $_GET['edit'];
+        
 
          $query = "SELECT cat_title FROM categories WHERE cat_id=$edit_cat_id";
          $result = mysqli_query($connection, $query);
          $edit_cat_title = mysqli_fetch_row($result)[0];
-
+         return $edit_cat_title;
          }
 }
 
