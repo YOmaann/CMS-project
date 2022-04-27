@@ -17,7 +17,7 @@ include "functions.php";
                             Welcome to Admin
                             <small>Author</small>
                         </h1>
-                        <div class="center-block">
+                        <div class="center-block" style="overflow: auto;">
                             
 
                         <!-- Table here -->
@@ -34,8 +34,11 @@ else {
         case "add_post":
             include "./include/add_posts.php";
             break;
+        case "edit_post":
+            include "./include/edit_post.php";
+            break;
         default:
-        echo "Hello";
+        // echo "Hello";
             include "./include/view_all_posts.php";
     }
 
