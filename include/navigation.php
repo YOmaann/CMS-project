@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CMS Project</a>
+                <a class="navbar-brand" href="index.php">CMS Project</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -27,7 +27,8 @@
                 $select_all_categories_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_categories_query)) {
-                    echo "<li><a href='#'>{$row['cat_title']}</a></li>";
+                    $cat_id = $row['cat_id'];
+                    echo "<li><a href='category.php?category=$cat_id'>{$row['cat_title']}</a></li>";
                 }
 
 

@@ -28,12 +28,17 @@
                     $row[6] = $r['post_tags'];
                     $row[7] = $r['post_comment_count'];
                     $row[8] = $r['post_date'];
+
+                    $query = "select * from categories where cat_id=".$row[3];
+                    $result  = mysqli_query($connection, $query);
+                
+                    $category = mysqli_fetch_row($result)[1];
 ?>
                                     <tr>
                                         <td><?= $row[0] ?></td>
                                         <td><?= $row[1] ?></td>
                                         <td><?= $row[2] ?></td>
-                                        <td><?= $row[3] ?></td>
+                                        <td><?= $category ?></td>
                                         <td><?= $row[4] ?></td>
                                         <td><img width="100" src="../images/<?= $row[5] ?>"></td>
                                         <td><?= $row[6] ?></td>

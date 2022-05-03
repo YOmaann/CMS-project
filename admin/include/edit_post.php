@@ -89,7 +89,7 @@ $query.= "where post_id=$p_id";
 <form action="" method="post" enctype="multipart/form-data">
                              <div class="form-group">
                                  <label for="post_cat">Post Category Id</label>
-                                 <select name="post_cat" id="post_cat">
+                                 <select name="post_cat" id="post_cat" class="form-control">
                                      <?php
 
                                      $query = "select * from categories";
@@ -118,7 +118,7 @@ $query.= "where post_id=$p_id";
                                  <input type="text" name="post_status" class="form-control" value="<?= $row[4] ?>">
                              </div>
                              <div class="form-group">
-                                 <label for="post_image">Post image</label>
+                                 <label for="post_image" class="form-control">Post image</label>
 
                                  <img src="../images/<?= $row[5] ?>" width="200" alt="">
                                  <input type="file" name="post_image" id="post_image">

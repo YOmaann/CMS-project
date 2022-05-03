@@ -19,8 +19,16 @@ include "./include/navigation.php";
             <div class="col-md-8">
             <?php
 
-            $query = "SELECT * from posts";
+            if(isset($_GET['category'])) {
+                $post_category = $_GET['category'];
+            }
+
+            $query = "SELECT * from posts where post_category_id=$post_category";
             $result = mysqli_query($connection, $query);
+
+            $c = mysqli_num_rows($result);
+            if($c == 0)
+            echo "<div class=''><h1>No Posts Found!</h1></div>";
 
             while($row = mysqli_fetch_assoc($result)) {
                 $post_title = $row['post_title'];
@@ -29,7 +37,7 @@ include "./include/navigation.php";
                 $post_author = $row['post_author'];
                 $post_image = $row['post_image'];
                 $post_title = $row['post_title'];
-                $post_content = substr($row['post_content'], 0, 100)."...";
+                $post_content = substr($row['post_content'], 0, 100);
 
 
             ?>

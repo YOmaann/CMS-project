@@ -30,10 +30,7 @@ if(isset($_POST['create_post'])) {
 
 
 <form action="posts.php?source=add_post" method="post" enctype="multipart/form-data">
-                             <div class="form-group">
-                                 <label for="post_cat">Post Category Id</label>
-                                 <input type="text" name="post_cat" class="form-control">
-                             </div>
+
                              <div class="form-group">
                                  <label for="post_author">Post Author</label>
                                  <input type="text" name="post_author" class="form-control">
@@ -41,6 +38,24 @@ if(isset($_POST['create_post'])) {
                              <div class="form-group">
                                  <label for="post_title">Post Title</label>
                                  <input type="text" name="post_title" class="form-control">
+                             </div>
+                             <div class="form-group">
+                                 <label for="post_cat">Post Category Id</label>
+                                 <select name="post_cat" id="post_cat" class="form-control">
+                                     <?php
+
+                                     $query = "select * from categories";
+                                     $result = mysqli_query($connection, $query);
+                                     while($row1 = mysqli_fetch_assoc($result)) {
+                                         $cat_id = $row1['cat_id'];
+                                         $cat_title = $row1['cat_title'];
+                                         echo "<option value=$cat_id ".(($row[3]==$cat_id)?"selected":"").">$cat_title</option>";
+                                     }
+
+
+?>
+                                 </select>
+                                 <!-- <input type="text" name="post_cat" class="form-control" value=""> -->
                              </div>
                              <div class="form-group">
                                  <label for="post_status">Post Status</label>
