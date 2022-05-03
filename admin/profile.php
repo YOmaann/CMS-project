@@ -3,8 +3,10 @@
 include "./include/admin_header.php";
 include "./include/admin_navigation.php";
 include "./include/admin_sidebar.php";
+include "functions.php";
 
-// if($connection) echo "Connected!"; else echo " Not connected!";
+
+if(isset($_SESSIO))
 ?>
 
         <div id="page-wrapper">
@@ -16,10 +18,37 @@ include "./include/admin_sidebar.php";
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome to Admin
-                            <small><?= $_SESSION['username'] ?></small>
+                            <small>Author</small>
                         </h1>
-                        <div>
+                        <div class="center-block" style="overflow: auto;">
                             
+
+                        <!-- Table here -->
+
+                        <?php
+if(isset($_GET['source'])) {
+    $source = $_GET['source'];
+}
+else {
+    $source ="";
+}
+
+    switch($source) {
+        case "add_user":
+            include "./include/add_user.php";
+            break;
+        case "edit_user":
+            include "./include/edit_user.php";
+            break;
+        default:
+        // echo "Hello";
+            include "./include/view_all_users.php";
+    }
+
+?>
+                        </div>
+
+                        <div class="col-xs-6">
                         </div>
                     </div>
                 </div>

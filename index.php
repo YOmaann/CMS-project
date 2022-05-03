@@ -12,6 +12,11 @@ include "./include/navigation.php";
 
     <!-- Page Content -->
     <div class="container">
+        <?php
+// session_start();
+// echo $_SESSION['username'];
+
+?>
 
         <div class="row">
 

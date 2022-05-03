@@ -1,8 +1,17 @@
 <?php
 
+session_start();
 ob_start(); // stores the output in a buffer before sending to the client.
 include "../include/db.php";
 
+
+if(isset($_SESSION['user_role'])) {
+    if($_SESSION['user_role'] !== "admin")
+    header("Location: ../index.php");
+}
+else {
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +24,7 @@ include "../include/db.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>CMS Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

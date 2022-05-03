@@ -18,10 +18,11 @@ if(isset($_GET['user_id'])) {
     $user_lastname = $_POST['user_lastname'];
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
+    $user_password = $_POST['user_password'];
 
     // $post_date = date('d-m-y');
     // $post_comment_count = 0;
-    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role'";
+    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role', user_password='$user_password'";
     $query.= "where user_id=$user_id";
     // $query = "UPDATE posts set post_category_id=$post_cat, post_title='$post_title', post_author='$post_author', post_content='$post_content', user_role='$post_content', post_status='$post_status', post_image='$post_image', post_date=now() where post_id=$p_id";
     // $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";

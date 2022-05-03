@@ -18,6 +18,32 @@
     <!-- /.input-group -->
 </div>
 
+<!-- Login -->
+<div class="well">
+
+    <h4>Login</h4>
+    <form action="include/login.php" method="post">
+    <div class="form-group">
+        <input name="username" type="text" class="form-control" placeholder="Enter Username">
+
+    </div>
+    <div class="form-group">
+        <input name="password" type="password" class="form-control" placeholder="Enter Password">
+
+    </div>
+    <span class="form-group-btn">
+            <button class="btn btn-primary" type="submit" name="login">Submit
+        </button>
+        </span>
+    </form>
+    <!-- search form -->
+    <!-- /.input-group -->
+</div>
+
+
+
+
+
 <!-- Blog Categories Well -->
 
 
