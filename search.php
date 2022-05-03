@@ -23,7 +23,7 @@ include "./include/navigation.php";
 
 if(isset($_REQUEST['search'])) {
     $search = $_REQUEST["search"];
-    $query = "SELECT * from posts where post_tags like '%$search%'";
+    $query = "SELECT * from posts where post_tags like '%$search%' and post_status='published'";
     $search_query = mysqli_query($connection, $query);
     if(!$search_query) {
         die("Search Failed !".mysqli_error($connection));
@@ -40,13 +40,10 @@ if(isset($_REQUEST['search'])) {
             $post_image = $row['post_image'];
             $post_title = $row['post_title'];
             $post_content = $row['post_content'];
+            $post_id = $row['post_id'];
 
 
         ?>
-            <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-            </h1>
 
             <!-- First Blog Post -->
             <h2>
@@ -60,7 +57,7 @@ if(isset($_REQUEST['search'])) {
             <img class="img-responsive" src="./images/<?= $post_image ?>" alt="">
             <hr>
             <p><?= $post_content ?></p>
-            <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
             <hr>
             <?php } ?>

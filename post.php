@@ -53,59 +53,87 @@ include "./include/navigation.php";
 
                    <!-- Blog Comments -->
 
+                   <?php
+
+                //    echo "Hello";
+                   if(isset($_POST['comment_author'])){
+                    //    echo "World";
+                       $comment_author = $_POST['comment_author'];
+                       $comment_email = $_POST['comment_email'];
+                       $comment_content = $_POST['comment_content'];
+
+                    //    echo $comment_author;
+
+                    $query = "INSERT INTO comments(comment_post_id,comment_author,comment_email,comment_content, comment_status, comment_date) values($post_id, '$comment_author', '$comment_email', '$comment_content', 'unapproved', now())";
+                    $result = mysqli_query($connection, $query);
+
+                   $query = "UPDATE posts set post_comment_count=post_comment_count+1 where post_id=$post_id";
+                   $result = $result & mysqli_query($connection, $query);
+
+                   if($result) echo "Successfully added the comment!";
+                   else echo "Something went wrong ".mysqli_error($connection);
+
+                   }
+                  
+
+?>
+
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                    <form action="#" method="post" role="form">
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                            <input type="text" class="form-control" name="comment_author" id="author" placeholder="Author Name">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                        <input type="text" class="form-control" name="comment_email" id="email" placeholder="Author Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pan">Comment</label>
+                            <textarea class="form-control" rows="3" id="pan" name="comment_content"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
                 </div>
 
                 <hr>
+                <div class="mb-4">
+                <h2>Comments</h2>
+                </div>
 
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <div class="well">
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
+
 
                 <!-- Comment -->
+
+                <?php
+
+                $query = "SELECT * FROM comments where comment_post_id=$post_id AND comment_status='approved' ORDER BY comment_id DESC";
+                $result = mysqli_query($connection, $query);
+
+                while($row = mysqli_fetch_assoc($result)) {
+                    $comment_author = $row['comment_author'];
+                    $comment_date = $row['comment_date'];
+                    $comment_content = $row['comment_content'];
+                
+                ?>
+                <div class="well">
                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><?= $comment_author ?>
+                            <small><?= $comment_date ?></small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <!-- Nested Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        <!-- End Nested Comment -->
+                    <?= $comment_content ?>    
                     </div>
+                </div>
+                </div>
+                <?php
+                }
+                ?>
                 </div>
 
             </div>

@@ -23,7 +23,7 @@ include "./include/navigation.php";
                 $post_category = $_GET['category'];
             }
 
-            $query = "SELECT * from posts where post_category_id=$post_category";
+            $query = "SELECT * from posts where post_category_id=$post_category AND post_status='published'";
             $result = mysqli_query($connection, $query);
 
             $c = mysqli_num_rows($result);

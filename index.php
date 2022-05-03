@@ -19,8 +19,11 @@ include "./include/navigation.php";
             <div class="col-md-8">
             <?php
 
-            $query = "SELECT * from posts";
+            $query = "SELECT * from posts where post_status='published'";
             $result = mysqli_query($connection, $query);
+
+            if(mysqli_num_rows($result) == 0) 
+            echo "<h1>No Posts here :)";
 
             while($row = mysqli_fetch_assoc($result)) {
                 $post_title = $row['post_title'];
