@@ -38,7 +38,7 @@ $query.= "where post_id=$p_id";
     // $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";
 
     $result = mysqli_query($connection, $query);
-    if($result) echo "Post updated!";
+    if($result) echo "<div>Post updated! See post <a href='../post.php?p_id=$p_id'>here</a></div>";
     else echo mysqli_error($connection);
 }
     // $post_title = $_POST['post_title'];
@@ -134,7 +134,7 @@ $query.= "where post_id=$p_id";
                              </div>
                              <div class="form-group">
                                  <label for="post_content">Post Content</label>
-                                 <textarea name="post_content" id=""  rows="10" class="form-control" ><?= $row[9] ?></textarea>
+                                 <textarea id="summernote" name="post_content" id=""  rows="10" class="form-control" ><?= $row[9] ?></textarea>
                              </div>
                              <div class="form-group">
                                  <input class="btn btn-primary" type="submit" name="update_post" value="Edit Post">

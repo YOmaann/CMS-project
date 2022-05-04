@@ -36,6 +36,19 @@
                      <li>
                         <a href="./admin/">Admin</a>
                     </li>
+
+                    <?php
+                    if(isset($_GET['p_id'])) {
+                        $post_id = $_GET['p_id'];
+
+                        if(isset($_SESSION['username'])) {
+                            echo "<li><a href='http://localhost/cms-project/admin/posts.php?source=edit_post&p_id=$post_id'>Edit Post</a></li>";
+                        }
+                    }
+
+
+
+?>
                     <!-- <li>
                         <a href="#">Services</a>
                     </li>

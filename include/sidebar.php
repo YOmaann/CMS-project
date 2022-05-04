@@ -80,7 +80,7 @@ $select_categories_sidebar = mysqli_query($connection, $query);
 
 <!-- Side Widget Well -->
 <?php
-include "widget.php";
+// include "widget.php";
 
 ?>
 

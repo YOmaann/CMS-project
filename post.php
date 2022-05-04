@@ -19,8 +19,6 @@ include "./include/navigation.php";
             <div class="col-md-8">
             <?php
 
-            $post_id = $_GET['p_id'];
-
             $query = "SELECT * from posts where post_id=$post_id";
             $result = mysqli_query($connection, $query);
 
@@ -136,8 +134,6 @@ include "./include/navigation.php";
                 ?>
                 </div>
 
-            </div>
-            </div>
 
             <!-- Blog Sidebar Widgets Column -->
 <?php

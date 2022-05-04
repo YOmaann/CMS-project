@@ -99,6 +99,8 @@ $categories_count = mysqli_num_rows($result);
   }
   </script>
 
+<!-- <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script> -->
+
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -115,7 +117,19 @@ $categories_count = mysqli_num_rows($result);
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.2/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.2/dist/summernote.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="./css/summernote.min.css" />
+    <script type="text/javascript" src="./js/summernote.min.js"></script> -->
+    <script src="./js/script.js"></script>
 </head>
 
 <body>
