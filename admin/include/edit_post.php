@@ -115,7 +115,12 @@ $query.= "where post_id=$p_id";
                              </div>
                              <div class="form-group">
                                  <label for="post_status">Post Status</label>
-                                 <input type="text" name="post_status" class="form-control" value="<?= $row[4] ?>">
+                                 <select name="post_status" id="post_status" class="form-control">
+                                     <option value="published" <?= (($row[4]=="published")?"selected":"") ?>>Published</option>
+                                     <option value="draft" <?= (($row[4]=="draft")?"selected":"") ?>>Draft</option>
+
+                                 </select>
+                                 <!-- <input type="text" name="post_status" class="form-control" value="<?= $row[4] ?>"> -->
                              </div>
                              <div class="form-group">
                                  <label for="post_image" class="form-control">Post image</label>
