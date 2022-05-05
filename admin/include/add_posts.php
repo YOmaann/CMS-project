@@ -22,7 +22,7 @@ if(isset($_POST['create_post'])) {
     $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";
 
     $result = mysqli_query($connection, $query);
-    if($result) echo "Post added!";
+    if($result) echo "<p style='background-color: #8be08b;'>Post added! Check <a href='../index.php'>here</a></p>";
     else echo mysqli_error($connection);
 }
 

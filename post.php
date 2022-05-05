@@ -29,6 +29,9 @@ include "./include/navigation.php";
                 $post_image = $row['post_image'];
                 $post_title = $row['post_title'];
                 $post_content = $row['post_content'];
+                $post_status = $row['post_status'];
+
+                if($post_status == "draft") header("Location: index.php");
 
 
             ?>
@@ -60,6 +63,8 @@ include "./include/navigation.php";
                        $comment_email = $_POST['comment_email'];
                        $comment_content = $_POST['comment_content'];
 
+                       if($comment_author !== "" && $comment_content !== "" && $comment_email !== "") {
+
                     //    echo $comment_author;
 
                     $query = "INSERT INTO comments(comment_post_id,comment_author,comment_email,comment_content, comment_status, comment_date) values($post_id, '$comment_author', '$comment_email', '$comment_content', 'unapproved', now())";
@@ -72,7 +77,10 @@ include "./include/navigation.php";
                    else echo "Something went wrong ".mysqli_error($connection);
 
                    }
-                  
+                }
+                else {
+                    echo "Invalid Data Input!";
+                }
 
 ?>
 

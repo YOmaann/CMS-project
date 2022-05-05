@@ -1,6 +1,49 @@
-<table class="table table-hover table-bordered">
+<?php
+
+if(isset($_POST['check'])){
+    $action = $_POST['action'];
+
+    foreach($_POST['check'] as $one) {
+        // echo $one."<br>";
+
+        switch($action) {
+            case 'publish':
+                $query = "UPDATE posts set post_status='published' where post_id=$one";
+                $result = mysqli_query($connection, $query);
+                break;
+            case 'draft':
+                $query = "UPDATE posts set post_status='draft' where post_id=$one";
+                $result = mysqli_query($connection, $query);
+                break;
+            case 'delete':
+                $query = "DELETE from posts where post_id=$one";
+                $result = mysqli_query($connection, $query);
+                break;
+        }
+    }
+}
+
+?>
+
+<form action="" method="post">
+    <div id="bulk" class="">
+    <div class="col-xs-4">
+        <select name="action" id="" class="form-control">
+            <option value="publish">Publish</option>
+            <option value="draft">Draft</option>
+            <option value="delete">Delete</option>
+        </select>
+        </div>
+        <div class="col-xs-4">
+            <input type="submit" name="submit" class="btn btn-success" value="Apply">
+            <a href="posts.php?source=add_post" class="btn btn-primary">Add New</a>
+        </div>
+        </div>
+        <br>
+<table class="table table-hover table-bordered" style="margin-top: 30px;">
                                 <thead>
                                     <tr>
+                                        <th><input type="checkbox" name="none" id="checkAll"></th>
                                         <th>Id</th>
                                         <th>Author</th>
                                         <th>Title</th>
@@ -37,9 +80,10 @@
                     $category = mysqli_fetch_row($result)[1];
 ?>
                                     <tr>
+                                        <td><input id="check" name="check[]" value="<?= $row[0] ?>" type="checkbox" class="checkboxes" id=""></td>
                                         <td><?= $row[0] ?></td>
                                         <td><?= $row[1] ?></td>
-                                        <td><?= $row[2] ?></td>
+                                        <td><a href="../post.php?p_id=<?= $row[0] ?>"><?= $row[2] ?></a></td>
                                         <td><?= $category ?></td>
                                         <td><?= $row[4] ?></td>
                                         <td><img width="100" src="../images/<?= $row[5] ?>"></td>
@@ -69,3 +113,4 @@ if(isset($_GET['delete'])) {
 }
 
 ?>
+</form>

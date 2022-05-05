@@ -38,7 +38,7 @@ $query.= "where post_id=$p_id";
     // $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";
 
     $result = mysqli_query($connection, $query);
-    if($result) echo "<div>Post updated! See post <a href='../post.php?p_id=$p_id'>here</a></div>";
+    if($result) echo "<p style='background-color: #8be08b'>Post updated! See post <a href='../post.php?p_id=$p_id'>here</a></p>";
     else echo mysqli_error($connection);
 }
     // $post_title = $_POST['post_title'];
