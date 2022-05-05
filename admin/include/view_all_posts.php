@@ -1,5 +1,17 @@
 <?php
 
+if(isset($_GET['reset_views'])) {
+    // echo "Hello";
+$p_id = $_GET['reset_views'];
+$query = "UPDATE posts SET post_views=0 where post_id=$p_id";
+$result = mysqli_query($connection, $query);
+
+if($result) echo "Views reset!";
+else echo "Something went wrong while resetting the views!";
+
+// include "./include/view_all_posts.php";
+}
+
 if(isset($_POST['check'])){
     $action = $_POST['action'];
 
@@ -19,6 +31,29 @@ if(isset($_POST['check'])){
                 $query = "DELETE from posts where post_id=$one";
                 $result = mysqli_query($connection, $query);
                 break;
+            case 'clone':
+                $query = "SELECT * FROM posts WHERE post_id=$one";
+                $result = mysqli_query($connection, $query);
+
+                $row = mysqli_fetch_array($result);
+                $post_title = $row['post_title'];
+                $post_date = $row['post_date'];
+                $post_cat = $row['post_category_id'];
+                $post_author = $row['post_author'];
+                $post_image = $row['post_image'];
+                $post_title = $row['post_title'];
+                $post_content = $row['post_content'];
+                $post_status = $row['post_status'];
+                $post_tags = $row['post_tags'];
+                $post_comment_count = 0;
+
+                $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status)";
+                $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";
+
+                $result = mysqli_query($connection, $query);
+
+                
+                break;
         }
     }
 }
@@ -32,6 +67,7 @@ if(isset($_POST['check'])){
             <option value="publish">Publish</option>
             <option value="draft">Draft</option>
             <option value="delete">Delete</option>
+            <option value="clone">Clone</option>
         </select>
         </div>
         <div class="col-xs-4">
@@ -53,6 +89,7 @@ if(isset($_POST['check'])){
                                         <th>Tags</th>
                                         <th>Comments</th>
                                         <th>Date</th>
+                                        <th>Views</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -73,6 +110,7 @@ if(isset($_POST['check'])){
                     $row[6] = $r['post_tags'];
                     $row[7] = $r['post_comment_count'];
                     $row[8] = $r['post_date'];
+                    $row[9] = $r['post_views'];
 
                     $query = "select * from categories where cat_id=".$row[3];
                     $result  = mysqli_query($connection, $query);
@@ -90,6 +128,7 @@ if(isset($_POST['check'])){
                                         <td><?= $row[6] ?></td>
                                         <td><?= $row[7] ?></td>
                                         <td><?= $row[8] ?></td>
+                                        <td><a href="posts.php?reset_views=<?= $row[0] ?>"><?= $row[9] ?></a></td>
                                         <td><a href="posts.php?source=edit_post&p_id=<?= $row[0] ?>">Edit</a></td>
                                         <td><a href="posts.php?delete=<?= $row[0] ?>">Delete</a></td>
 

@@ -10,6 +10,11 @@ if(isset($_POST['login'])) {
     $username = mysqli_real_escape_string($connection, $username);
     $password = mysqli_real_escape_string($connection, $password);
 
+    // $query = "SELECT randSalt from users";
+    // $select_randsalt = mysqli_query($connection, $query);
+    // $row  = mysqli_fetch_array($select_randsalt);
+
+
     $query = "SELECT * FROM users WHERE user_name='$username'";
     $select_user_query = mysqli_query($connection, $query);
 
@@ -17,11 +22,15 @@ if(isset($_POST['login'])) {
 
         $db_id = $row['user_id'];
         $db_username = $row['user_name'];
+        $db_salt = $row['randSalt'];
         
         $db_firstname = $row['user_firstname'];
         $db_lastname = $row['user_lastname'];
         $db_role = $row['user_role'];
         $db_password = $row['user_password'];
+
+        // $salt = $row['randSalt'];
+        $password = crypt($password, $db_salt);
         
 
     }

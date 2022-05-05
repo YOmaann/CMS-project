@@ -8,6 +8,15 @@ if(isset($_POST['create_user'])) {
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
 
+    $query = "SELECT randSalt from users";
+    $select_randsalt = mysqli_query($connection, $query);
+
+    $row  = mysqli_fetch_array($select_randsalt);
+
+    $salt = $row['randSalt'];
+
+    $user_pass = crypt($user_pass, $salt);
+
     // $post_date = date('d-m-y');
     // $post_comment_count = 0;
 

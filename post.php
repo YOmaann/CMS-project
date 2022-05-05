@@ -33,6 +33,10 @@ include "./include/navigation.php";
 
                 if($post_status == "draft") header("Location: index.php");
 
+                // if(!isset($_POST['comment_author'])){
+
+                // }
+
 
             ?>
 
@@ -57,7 +61,7 @@ include "./include/navigation.php";
                    <?php
 
                 //    echo "Hello";
-                   if(isset($_POST['comment_author'])){
+            if(isset($_POST['comment_author'])){
                     //    echo "World";
                        $comment_author = $_POST['comment_author'];
                        $comment_email = $_POST['comment_email'];
@@ -77,10 +81,16 @@ include "./include/navigation.php";
                    else echo "Something went wrong ".mysqli_error($connection);
 
                    }
-                }
-                else {
+                   else {
                     echo "Invalid Data Input!";
                 }
+                header("Location: post.php?p_id=$post_id");
+            }
+            else {
+                $query = "UPDATE posts SET post_views=post_views+1 where post_id=$post_id";
+                $result = mysqli_query($connection, $query);
+            }
+                
 
 ?>
 

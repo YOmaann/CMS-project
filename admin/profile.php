@@ -18,7 +18,27 @@ if(isset($_POST['update_user'])) {
 
     // $post_date = date('d-m-y');
     // $post_comment_count = 0;
-    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role', user_password='$user_password'";
+
+    $_SESSION['username'] = $user_name;
+    $_SESSION['firstname'] = $user_firstname;
+    $_SESSION['lastname'] = $user_lastname;
+    $_SESSION['user_role'] = $user_role;
+
+    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role'";
+    
+    if($user_password !== "") {
+
+    $querySalt = "SELECT randSalt from users where user_id=$user_id";
+    $select_randsalt = mysqli_query($connection, $querySalt);
+    $row  = mysqli_fetch_array($select_randsalt);
+    $salt = $row['randSalt'];
+
+    $user_password = crypt($user_password, $salt);
+
+
+    $query .= ", user_password='$user_password' ";
+    }
+    
     $query.= " where user_id=$user_id";
     // $query = "UPDATE posts set post_category_id=$post_cat, post_title='$post_title', post_author='$post_author', post_content='$post_content', user_role='$post_content', post_status='$post_status', post_image='$post_image', post_date=now() where post_id=$p_id";
     // $query .= "VALUES('$post_cat', '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', '$post_comment_count', '$post_status')";
@@ -84,7 +104,7 @@ if(isset($_SESSION['username'])) {
                              </div>
                              <div class="form-group">
                                  <label for="user_password">User Password</label>
-                                 <input type="password" name="user_password" class="form-control" id="user_password" value="<?= $user_password ?>">
+                                 <input type="password" name="user_password" class="form-control" id="user_password" value="">
                              </div>
                              <div class="form-group">
                                  <label for="user_email">Email</label>

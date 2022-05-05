@@ -19,6 +19,9 @@
 </div>
 
 <!-- Login -->
+<?php
+if(!isset($_SESSION['username'])) {
+?>
 <div class="well">
 
     <h4>Login</h4>
@@ -39,6 +42,11 @@
     <!-- search form -->
     <!-- /.input-group -->
 </div>
+
+<?php
+
+}
+?>
 
 
 

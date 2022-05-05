@@ -1,31 +1,55 @@
 <?php  include "include/db.php"; ?>
  <?php  include "include/header.php"; ?>
-<?php
 
-if(isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $passsword = $_POST['password'];
-
-    $username = mysqli_real_escape_string($connection, $username);
-    $email = mysqli_real_escape_string($connection, $email);
-    $passsword = mysqli_real_escape_string($connection, $passsword);
-
-    $query = "SELECT randSalt from users";
-    $select_randsalt = mysqli_query($connection, $query);
-
-    if(!$select_randsalt) {
-        echo mysqli_error($connection);
-    }
-}
-
-?>
 
     <!-- Navigation -->
     
     <?php  include "include/navigation.php"; ?>
     
 </nav>
+
+<?php
+$message = "";
+if(isset($_POST['submit'])) {
+    // echo "hello";
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $passsword = $_POST['password'];
+
+
+    if($username === "" || $email ==="" || $passsword ==="") {
+       $message = "<h6 class='text-center'>Fields cannot be empty!</h6>";
+    }
+    else {
+
+    $username = mysqli_real_escape_string($connection, $username);
+    $email = mysqli_real_escape_string($connection, $email);
+    $password = mysqli_real_escape_string($connection, $passsword);
+
+    
+
+    $query = "SELECT randSalt from users";
+    $select_randsalt = mysqli_query($connection, $query);
+
+    $row  = mysqli_fetch_array($select_randsalt);
+
+    $salt = $row['randSalt'];
+
+    $password = crypt($password, $salt);
+    // echo $password;
+
+    $query = "INSERT INTO users(user_name, user_password, user_role, user_email) values('$username', '$password', 'subscriber', '$email')";
+    $result = mysqli_query($connection, $query);
+
+    $_SESSION['username'] = $username;
+    $_SESSION['firstname'] = "No";
+    $_SESSION['lastname'] = "Name";
+    $_SESSION['user_role'] = "subscriber";
+    header("Location: ./admin");
+    }
+}
+
+?>
     <!-- Page Content -->
     <div class="container">
     
@@ -34,7 +58,9 @@ if(isset($_POST['submit'])) {
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
+
                 <h1>Register</h1>
+                <?= $message ?>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
