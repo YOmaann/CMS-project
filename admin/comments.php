@@ -31,6 +31,9 @@ else {
 }
 
     switch($source) {
+        // case "view_post":
+        //     include "./include/view_post_comments.php";
+        //     break;
         default:
         // echo "Hello";
             include "./include/view_all_comments.php";

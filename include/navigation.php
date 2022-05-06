@@ -23,19 +23,24 @@
 
                 <?php
 
+                $url = basename($_SERVER['PHP_SELF']);
+                if(isset($_GET['category'])) {
+                    $the_cat_id = $_GET['category'];
+                }
+
                 $query = "select * from categories";
                 $select_all_categories_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_categories_query)) {
                     $cat_id = $row['cat_id'];
-                    echo "<li><a href='category.php?category=$cat_id'>{$row['cat_title']}</a></li>";
+                    echo "<li><a href='category.php?category=$cat_id' class='".(($url == "category.php")?(($cat_id == $the_cat_id)?"active":""):"")."'>{$row['cat_title']}</a></li>";
                 }
 
 
 ?>
 
 
-
+<li><a href='contact.php'>Contact Us</a></li>
                     <?php
                     if(!isset($_SESSION['username'])) {
                         echo "                     <li>

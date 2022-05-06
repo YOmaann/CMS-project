@@ -20,7 +20,7 @@
 
 <!-- Login -->
 <?php
-if(!isset($_SESSION['username'])) {
+if(!isset($_SESSION['username'])):
 ?>
 <div class="well">
 
@@ -45,7 +45,23 @@ if(!isset($_SESSION['username'])) {
 
 <?php
 
-}
+
+else:
+?>
+<div class="well">
+<h4>Hi <?= $_SESSION['username'] ?></h4>
+<span class="form-group-btn">
+    <a href="./admin/include/logout.php">
+        <button class="btn btn-primary" type="button" name="login">Logout
+    </button>
+</a>
+    </span>
+<!-- search form -->
+<!-- /.input-group -->
+</div>
+<?php
+
+endif;
 ?>
 
 

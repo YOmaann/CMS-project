@@ -73,3 +73,16 @@ function delete_categories() {
         header("Location: categories.php");
     }
 }
+function usersOnline() {
+    include "../include/db.php";
+    // session_start();
+
+    $time_out = time() - 60;
+    // echo $time_out." ";
+    $query = "SELECT * from users_online where time > $time_out";
+    $result = mysqli_query($connection, $query);
+    echo "Users online: ".mysqli_num_rows($result);
+}
+if(isset($_GET['onlineusers'])) {
+    usersOnline();
+}

@@ -24,7 +24,21 @@ include "./include/navigation.php";
             <div class="col-md-8">
             <?php
 
-            $query = "SELECT * from posts where post_status='published'";
+            $page = 0;
+            if(isset($_GET['page']))
+                $page = $_GET['page'] - 1;
+
+            $query = "SELECT * from posts";
+
+            if(!isset($_SESSION['user_role'])) {
+                $query .= " where post_status='published'";
+            }
+            if(isset($_SESSION['user_role']) && $_SESSION['user_role']!="admin") {
+                $query .= " where post_status='published'";
+            }
+
+            $query .= " LIMIT $page, 10"; 
+
             $result = mysqli_query($connection, $query);
 
             if(mysqli_num_rows($result) == 0) 
@@ -64,8 +78,35 @@ include "./include/navigation.php";
 
                 <hr>
                 <?php } ?>
+                <div><ul class="pager">
+            <?php
+            $query_count = "SELECT * from posts where post_status='published'";
+            $result_count = mysqli_query($connection, $query_count);
+            $post_count = mysqli_num_rows($result_count);
+            $post_page_count = ceil($post_count / 10);
+            // echo "$post_count $post_page_count asfdsfd";
 
+            if($page > 0)
+            echo "<li><a href='index.php?page=$page'><</a></li>";
+
+            for($i = (($page > 3)?$page - 3:1); $i < $page + 1; $i++) {
+                echo "<li><a href='index.php?page=$i'>$i</a></li>&nbsp";
+            }
+            echo "&nbsp<li>".($page + 1)."</li>&nbsp";
+            for($i = $page + 2; $i <= $page + 5 && $i <= $post_page_count; $i++) {
+                echo "<li><a href='index.php?page=$i'>$i</a></li>&nbsp";
+            }
+            if($page + 5 < $post_page_count - 1)
+            echo "<li><a href='index.php?page=".($page + 2)."'>></a></li>";
+
+            
+
+
+?>
+</p>
+</div>
             </div>
+
 
             <!-- Blog Sidebar Widgets Column -->
 <?php

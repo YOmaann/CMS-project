@@ -18,6 +18,10 @@
 
                                 <?php
                 $query = "Select * from comments";
+                if(isset($_GET['p_id'])) {
+                    $post_id = $_GET['p_id'];
+                    $query .= " where comment_post_id=$post_id";
+                }
                 $posts = mysqli_query($connection, $query);
                 while($r = mysqli_fetch_assoc($posts)) {
 
@@ -67,7 +71,7 @@ if(isset($_GET['delete'])) {
     if($result) echo "Successfully deleted the comment!";
     else echo "Something went wrong ".mysqli_error($connection);
 
-    header("Location: comments.php");
+    header("Location: comments.php?p_id=$the_post_id");
 
 }
 if(isset($_GET['approve'])) {

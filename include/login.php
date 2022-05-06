@@ -1,4 +1,16 @@
 <?php
+
+
+/*
+
+Better way to store password securely:
+
+$password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12))
+
+
+
+
+*/
 include "db.php";
 
 session_start();

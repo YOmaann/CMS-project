@@ -126,7 +126,7 @@ if(isset($_POST['check'])){
                                         <td><?= $row[4] ?></td>
                                         <td><img width="100" src="../images/<?= $row[5] ?>"></td>
                                         <td><?= $row[6] ?></td>
-                                        <td><?= $row[7] ?></td>
+                                        <td><a href="comments.php?p_id=<?= $row[0] ?>"><?= $row[7] ?></a></td>
                                         <td><?= $row[8] ?></td>
                                         <td><a href="posts.php?reset_views=<?= $row[0] ?>"><?= $row[9] ?></a></td>
                                         <td><a href="posts.php?source=edit_post&p_id=<?= $row[0] ?>">Edit</a></td>

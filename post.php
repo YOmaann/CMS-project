@@ -20,6 +20,13 @@ include "./include/navigation.php";
             <?php
 
             $query = "SELECT * from posts where post_id=$post_id";
+
+            if(!isset($_SESSION['user_role'])) {
+                $query .= " and post_status='published'";
+            }
+            if(isset($_SESSION['user_role']) && $_SESSION['user_role']!="admin") {
+                $query .= " and post_status='published'";
+            }
             $result = mysqli_query($connection, $query);
 
             $row = mysqli_fetch_assoc($result);
@@ -31,7 +38,7 @@ include "./include/navigation.php";
                 $post_content = $row['post_content'];
                 $post_status = $row['post_status'];
 
-                if($post_status == "draft") header("Location: index.php");
+                // if($post_status == "draft") header("Location: index.php");
 
                 // if(!isset($_POST['comment_author'])){
 
