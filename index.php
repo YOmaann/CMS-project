@@ -111,6 +111,17 @@ include "./include/navigation.php";
             <!-- Blog Sidebar Widgets Column -->
 <?php
 
+if(ifItIsMethod("post")) {
+	if(isset($_POST['username']) && isset($_POST['password'])) {
+		if(login_user($_POST['username'], $_POST['password'])) {
+			redirect('./admin/');
+		}
+		else {
+			redirect("index.php");
+		}
+	}
+}
+
 include "./include/sidebar.php";
 ?>
         <!-- /.row -->

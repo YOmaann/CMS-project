@@ -3,6 +3,7 @@
 session_start();
 ob_start(); // stores the output in a buffer before sending to the client.
 include "../include/db.php";
+// include "functions.php";
 
 
 // if(isset($_SESSION['user_role'])) {
@@ -17,42 +18,61 @@ if(!isset($_SESSION['username'])){
     header("Location: ../index.php");
 }
 
-$query = "select * from posts where post_status='published'";
-$result = mysqli_query($connection, $query);
-$posts_published_count = mysqli_num_rows($result);
+// $query = "select * from posts where post_status='published'";
+// $result = mysqli_query($connection, $query);
+$posts_published_count = getCount("posts", "where post_status='published'");
 
-$query = "select * from posts";
-$result = mysqli_query($connection, $query);
-$posts_count = mysqli_num_rows($result);
+// $query = "select * from posts";
+// $result = mysqli_query($connection, $query);
+$posts_count = getCount("posts");
 
 
-$query = "select * from posts where post_status='draft'";
-$result = mysqli_query($connection, $query);
-$posts_draft_count = mysqli_num_rows($result);
+// $query = "select * from posts where post_status='draft'";
+// $result = mysqli_query($connection, $query);
+$posts_draft_count = getCount("posts", "where post_status='draft'");
 
-$query = "select * from comments where comment_status='approved'";
-$result = mysqli_query($connection, $query);
-$comments_count = mysqli_num_rows($result);
+// $query = "select * from comments where comment_status='approved'";
+// $result = mysqli_query($connection, $query);
+$comments_count = getCount("comments", "where comment_status='approved'");
 
-$query = "select * from comments where comment_status='unapproved'";
-$result = mysqli_query($connection, $query);
-$comments_pending_count = mysqli_num_rows($result);
+// $query = "select * from comments where comment_status='unapproved'";
+// $result = mysqli_query($connection, $query);
+$comments_pending_count = getCount("comments", "where comment_status='unapproved'");
 
-$query = "select * from users";
-$result = mysqli_query($connection, $query);
-$users_count = mysqli_num_rows($result);
+// $query = "select * from users";
+// $result = mysqli_query($connection, $query);
+$users_count = getCount("users");
 
-$query = "select * from users where user_role='admin'";
-$result = mysqli_query($connection, $query);
-$users_admin_count = mysqli_num_rows($result);
+// $query = "select * from users where user_role='admin'";
+// $result = mysqli_query($connection, $query);
+$users_admin_count = getCount("users", "where user_role='admin'");
 
-$query = "select * from users where user_role='subscriber'";
-$result = mysqli_query($connection, $query);
-$users_subscriber_count = mysqli_num_rows($result);
+// $query = "select * from users where user_role='subscriber'";
+// $result = mysqli_query($connection, $query);
+$users_subscriber_count = getCount("users", "where user_role='subscriber'");
 
-$query = "select * from categories";
+// $query = "select * from categories";
+// $result = mysqli_query($connection, $query);
+$categories_count = getCount("categories");
+
+$session = session_id();
+$time = time();
+// $time_out_in_seconds = 60;
+
+// $time_out = $time + $time_out_in_seconds;
+
+// $_SESSION['timeout'] = $time_out;
+
+$query = "SELECT * FROM users_online WHERE session = '$session'";
 $result = mysqli_query($connection, $query);
-$categories_count = mysqli_num_rows($result);
+$count = mysqli_num_rows($result);
+
+if($count == 0) {
+    mysqli_query($connection, "INSERT INTO users_online(session, time) values('$session', '$time') ");
+}
+else {
+    mysqli_query($connection, "UPDATE users_online SET time='$time' WHERE session='$session'");
+}
 
 ?>
 <!DOCTYPE html>

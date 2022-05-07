@@ -1,9 +1,10 @@
 <?php
 
+include "functions.php";
 include "./include/admin_header.php";
 include "./include/admin_navigation.php";
 include "./include/admin_sidebar.php";
-include "functions.php";
+// include "functions.php";
 ?>
 
         <div id="page-wrapper">

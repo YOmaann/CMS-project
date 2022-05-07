@@ -1,5 +1,7 @@
 <?php  include "include/db.php"; ?>
- <?php  include "include/header.php"; ?>
+<?php //include "./admin/functions.php"; ?>
+<?php  include "include/header.php"; ?>
+
 
 
     <!-- Navigation -->
@@ -20,6 +22,10 @@ if(isset($_POST['submit'])) {
     if($username === "" || $email ==="" || $passsword ==="") {
        $message = "<h6 class='text-center'>Fields cannot be empty!</h6>";
     }
+    else if(username_exists($username) || email_exists($email)){
+        $message = "Username or Email already exists!";
+
+    }
     else {
 
     $username = mysqli_real_escape_string($connection, $username);
@@ -28,14 +34,15 @@ if(isset($_POST['submit'])) {
 
     
 
-    $query = "SELECT randSalt from users";
-    $select_randsalt = mysqli_query($connection, $query);
+    // $query = "SELECT randSalt from users";
+    // $select_randsalt = mysqli_query($connection, $query);
 
-    $row  = mysqli_fetch_array($select_randsalt);
+    // $row  = mysqli_fetch_array($select_randsalt);
 
-    $salt = $row['randSalt'];
+    // $salt = $row['randSalt'];
 
-    $password = crypt($password, $salt);
+    // $password = crypt($password, $salt);
+    $password = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
     // echo $password;
 
     $query = "INSERT INTO users(user_name, user_password, user_role, user_email) values('$username', '$password', 'subscriber', '$email')";

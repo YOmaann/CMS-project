@@ -25,7 +25,7 @@ if(!isset($_SESSION['username'])):
 <div class="well">
 
     <h4>Login</h4>
-    <form action="include/login.php" method="post">
+    <form method="post">
     <div class="form-group">
         <input name="username" type="text" class="form-control" placeholder="Enter Username">
 
@@ -41,6 +41,9 @@ if(!isset($_SESSION['username'])):
     </form>
     <!-- search form -->
     <!-- /.input-group -->
+    <div class="form-group">
+        <a href="forgot.php?forgot=<?= uniqid() ?>">Forgot Password</a>
+    </div>
 </div>
 
 <?php

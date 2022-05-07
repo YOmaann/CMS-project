@@ -1,14 +1,15 @@
 <?php
+ob_start();
 session_start();
 
 ?>
-
+<?php include "./admin/functions.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>CMS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

@@ -38,10 +38,10 @@
                                         <!-- <td><a href="../post.php?p_id="></a></td> -->
                                         <!-- <td></td> -->
                                         <!-- <td></td> -->
-                                        <td><a href="users.php?change_to_admin=<?= $r['user_id'] ?>">Admin</a></td>
-                                        <td><a href="users.php?change_to_subscriber=<?= $r['user_id'] ?>">Subscriber</a></td>
-                                        <td><a href="users.php?source=edit_user&user_id=<?= $r['user_id'] ?>">Edit</a></td>
-                                        <td><a href="users.php?delete=<?= $r['user_id'] ?>">Delete</a></td>
+                                        <td><a href="users.php?change_to_admin=<?= $r['user_id'] ?>" class="btn btn-info">Admin</a></td>
+                                        <td><a href="users.php?change_to_subscriber=<?= $r['user_id'] ?>" class="btn btn-info">Subscriber</a></td>
+                                        <td><a href="users.php?source=edit_user&user_id=<?= $r['user_id'] ?>" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="users.php?delete=<?= $r['user_id'] ?>" class="btn btn-danger">Delete</a></td>
 
                                         
                                     </tr>

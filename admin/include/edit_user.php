@@ -22,16 +22,17 @@ if(isset($_GET['user_id'])) {
 
     $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role'";
     
-    if($user_password !== "") {
+    if($user_password != "") {
 
-    $querySalt = "SELECT randSalt from users where user_id=$user_id";
-    $select_randsalt = mysqli_query($connection, $querySalt);
-    $row  = mysqli_fetch_array($select_randsalt);
-    $salt = $row['randSalt'];
+    // $querySalt = "SELECT randSalt from users where user_id=$user_id";
+    // $select_randsalt = mysqli_query($connection, $querySalt);
+    // $row  = mysqli_fetch_array($select_randsalt);
+    // $salt = $row['randSalt'];
 
-    $user_password = crypt($user_password, $salt);
+    // $user_password = crypt($user_password, $salt);
 
 
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, ["cost" => 10]);
     $query .= ", user_password='$user_password' ";
     }
 

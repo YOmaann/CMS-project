@@ -97,7 +97,7 @@ if(isset($_POST['check'])){
                                 <tbody>
 
                                 <?php
-                $query = "Select * from posts";
+                $query = "Select posts.post_id, posts.post_author, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, posts.post_tags, posts.post_comment_count, posts.post_date, posts.post_views, categories.cat_title from posts, categories where posts.post_category_id = categories.cat_id";
                 $posts = mysqli_query($connection, $query);
                 while($r = mysqli_fetch_assoc($posts)) {
                     $row = [];
@@ -112,10 +112,12 @@ if(isset($_POST['check'])){
                     $row[8] = $r['post_date'];
                     $row[9] = $r['post_views'];
 
-                    $query = "select * from categories where cat_id=".$row[3];
-                    $result  = mysqli_query($connection, $query);
+                    $category = $r['cat_title'];
+
+                    // $query = "select * from categories where cat_id=".$row[3];
+                    // $result  = mysqli_query($connection, $query);
                 
-                    $category = mysqli_fetch_row($result)[1];
+                    // $category = mysqli_fetch_row($result)[1];
 ?>
                                     <tr>
                                         <td><input id="check" name="check[]" value="<?= $row[0] ?>" type="checkbox" class="checkboxes" id=""></td>
@@ -129,8 +131,8 @@ if(isset($_POST['check'])){
                                         <td><a href="comments.php?p_id=<?= $row[0] ?>"><?= $row[7] ?></a></td>
                                         <td><?= $row[8] ?></td>
                                         <td><a href="posts.php?reset_views=<?= $row[0] ?>"><?= $row[9] ?></a></td>
-                                        <td><a href="posts.php?source=edit_post&p_id=<?= $row[0] ?>">Edit</a></td>
-                                        <td><a href="posts.php?delete=<?= $row[0] ?>">Delete</a></td>
+                                        <td><a href="posts.php?source=edit_post&p_id=<?= $row[0] ?>" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="posts.php?delete=<?= $row[0] ?>" class="btn btn-danger">Delete</a></td>
 
                                         
                                     </tr>

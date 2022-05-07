@@ -1,9 +1,10 @@
 <?php
 
+include "functions.php";
 include "./include/admin_header.php";
 include "./include/admin_navigation.php";
 include "./include/admin_sidebar.php";
-include "functions.php";
+
 ?>
 
         <div id="page-wrapper">
@@ -57,7 +58,7 @@ update_categories();
                         <!-- </div> -->
                         </div>
 
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" style="overflow: auto">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>

@@ -1,11 +1,31 @@
 <?php  
 include "./include/db.php";
 include "./include/header.php";
+
+/* 
+$stmt = mysqli_prepare($connection, "SELECT * from posts where post_id=?");
+
+mysqli_stmt_bind_param($stmt, "i", $post_categoy_id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image);
+
+
+if(mysqli_stmt_num_rows($stmt) > 0) {
+    while(mysqli_fetch($stmt)){
+        echo "$post_id $post_title..."; 
+    }
+}
+
+
+
+
+
+*/
 ?>
 
     <!-- Navigation -->
 <?php  
-include "./include/navigation.php";
+include "include/navigation.php";
 ?>
         <!-- /.container -->
     </nav>

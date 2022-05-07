@@ -1,9 +1,15 @@
 <?php
 
+include "functions.php";
 include "./include/admin_header.php";
 include "./include/admin_navigation.php";
 include "./include/admin_sidebar.php";
-include "functions.php";
+// include "functions.php";
+
+
+if(!is_admin($_SESSION['username'])) {
+    header("Location: index.php");
+}
 ?>
 
         <div id="page-wrapper">

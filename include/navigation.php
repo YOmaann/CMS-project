@@ -39,10 +39,9 @@
 
 ?>
 
-
-<li><a href='contact.php'>Contact Us</a></li>
                     <?php
-                    if(!isset($_SESSION['username'])) {
+                    if(!isLoggedIn()) {
+                        echo "<li><a href='login.php'>Login</a></li>";
                         echo "                     <li>
                         <a href='./registration.php'> Register</a>
                     </li>";
@@ -70,6 +69,7 @@
                     <li>
                         <a href="#">Contact</a>
                     </li> -->
+                    <li><a href='contact.php'>Contact Us</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

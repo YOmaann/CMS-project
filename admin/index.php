@@ -1,26 +1,8 @@
 <?php
 
+include "functions.php";
 include "./include/admin_header.php";
 
-
-$session = session_id();
-$time = time();
-// $time_out_in_seconds = 60;
-
-// $time_out = $time + $time_out_in_seconds;
-
-// $_SESSION['timeout'] = $time_out;
-
-$query = "SELECT * FROM users_online WHERE session = '$session'";
-$result = mysqli_query($connection, $query);
-$count = mysqli_num_rows($result);
-
-if($count == 0) {
-    mysqli_query($connection, "INSERT INTO users_online(session, time) values('$session', '$time') ");
-}
-else {
-    mysqli_query($connection, "UPDATE users_online SET time='$time' WHERE session='$session'");
-}
 
 
 include "./include/admin_navigation.php";

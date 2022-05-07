@@ -1,5 +1,6 @@
 <?php
 
+include "functions.php";
 include "./include/admin_header.php";
 include "./include/admin_navigation.php";
 include "./include/admin_sidebar.php";
@@ -13,7 +14,6 @@ if(isset($_POST['update_user'])) {
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
     $user_email = $_POST['user_email'];
-    $user_role = $_POST['user_role'];
     $user_password = $_POST['user_password'];
 
     // $post_date = date('d-m-y');
@@ -22,20 +22,27 @@ if(isset($_POST['update_user'])) {
     $_SESSION['username'] = $user_name;
     $_SESSION['firstname'] = $user_firstname;
     $_SESSION['lastname'] = $user_lastname;
-    $_SESSION['user_role'] = $user_role;
 
-    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email', user_role='$user_role'";
-    
+    $query = "UPDATE users set user_name='$user_name', user_firstname='$user_firstname', user_lastname='$user_lastname', user_email='$user_email'";
+   
+
+    if(isset($_POST['user_role'])){
+        $user_role = $_POST['user_role'];
+        $_SESSION['user_role'] = $user_role;
+        $query .= ", user_role='$user_role'";
+}
+
+ 
     if($user_password !== "") {
 
-    $querySalt = "SELECT randSalt from users where user_id=$user_id";
-    $select_randsalt = mysqli_query($connection, $querySalt);
-    $row  = mysqli_fetch_array($select_randsalt);
-    $salt = $row['randSalt'];
+    // $querySalt = "SELECT randSalt from users where user_id=$user_id";
+    // $select_randsalt = mysqli_query($connection, $querySalt);
+    // $row  = mysqli_fetch_array($select_randsalt);
+    // $salt = $row['randSalt'];
 
-    $user_password = crypt($user_password, $salt);
-
-
+    // $user_password = crypt($user_password, $salt);
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, ["cost" => 10]);
+    
     $query .= ", user_password='$user_password' ";
     }
     
@@ -110,6 +117,10 @@ if(isset($_SESSION['username'])) {
                                  <label for="user_email">Email</label>
                                  <input type="email" name="user_email" class="form-control" id="user_email"  value="<?= $user_email ?>">
                              </div>
+                             <?php
+
+                             if(is_admin($_SESSION['username'])) {
+                             ?>
                              <div class="form-group">
                                  <label for="user_role">Role</label>
                                  <select name="user_role" id="user_role" class="form-control">
@@ -131,6 +142,7 @@ if(isset($_SESSION['username'])) {
                                  </select>
                                  <!-- <input type="text" name="post_cat" class="form-control" value=""> -->
                              </div>
+                             <?php } ?>
 
                              <!-- <div class="form-group">
                                  <label for="post_image">Post image</label>

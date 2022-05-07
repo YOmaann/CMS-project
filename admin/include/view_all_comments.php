@@ -43,10 +43,10 @@
                                         <td><a href="../post.php?p_id=<?= $post_id ?>"><?= $post ?></a></td>
                                         <td><?= $r['comment_date'] ?></td>
                                         <!-- <td></td> -->
-                                        <td><a href="comments.php?approve=<?= $r['comment_id'] ?>">Approve</a></td>
-                                        <td><a href="comments.php?unapprove=<?= $r['comment_id'] ?>">Unapprove</a></td>
+                                        <td><a href="comments.php?approve=<?= $r['comment_id'] ?>" class="btn btn-success">Approve</a></td>
+                                        <td><a href="comments.php?unapprove=<?= $r['comment_id'] ?>" class="btn btn-warning">Unapprove</a></td>
                                         <!-- <td><a href="comments.php?source=edit_comment&p_id=<?= $r['comment_id'] ?>">Edit</a></td> -->
-                                        <td><a href="comments.php?delete=<?= $r['comment_id'] ?>&p_id=<?= $post_id ?>">Delete</a></td>
+                                        <td><a href="comments.php?delete=<?= $r['comment_id'] ?>&p_id=<?= $post_id ?>" class="btn btn-danger">Delete</a></td>
 
                                         
                                     </tr>
