@@ -1,13 +1,17 @@
+<?php
+            // use PHPMailer;
+            require 'vendor/autoload.php';
+?>
 <?php  include "include/db.php"; ?>
 <?php  include "include/header.php"; ?>
 
 <?php
-if(!ifItIsMethod('get') || !isset($_GET['forgot'])) {
+if(!isset($_GET['forgot'])) {
     redirect("index.php");
 }
 
 if(ifItIsMethod('post')) {
-    IF(ISSET($_POST['email'])) {
+    IF(isset($_POST['email'])) {
         $email = $_POST['email'];
 
         $length = 50;
@@ -15,7 +19,43 @@ if(ifItIsMethod('post')) {
         $token = bin2hex(openssl_random_pseudo_bytes($length));
 
         if(email_exists($email)) {
-            mysqli_prepare($connection, "UPDATE users SET token='$token' where user_email='$email'");
+            $stmt = mysqli_prepare($connection, "UPDATE users SET token=? where user_email=?");
+            mysqli_stmt_bind_param($stmt, "ss", $token, $email);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            // mail();
+
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->Host = 'smtp.mailtrap.io';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'd73997c2d28e7d';
+            $mail->Password = '5ed5c6e51f0ad5';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 2525;
+
+            $mail->setFrom('cms@company.com', 'CMS Client');
+            // echo $email;
+            $mail->addReplyTo('cms@company.com', 'CMS Client');
+            $mail->addAddress("luckykispotta112@gmail.com", "User");
+
+            $mail->isHTML(true);
+
+            $mail->Subject = "Forgot Password";
+// $mail->addEmbeddedImage('path/to/image_file.jpg', 'image_cid');
+            $mail->Body = '<h3>Reset Password here</h3>';
+            $mail->AltBody = 'This is the plain text version of the email content';
+
+            if(!$mail->send()){
+                echo 'Message could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            }else{
+                echo 'Message has been sent';
+            }
+
+        }
+        else {
+            echo "Email is not registered!";
         }
     }
 }

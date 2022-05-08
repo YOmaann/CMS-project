@@ -1,5 +1,10 @@
 <?php
+// database functons
 
+function query($query = "") {
+    global $connection;
+    return mysqli_query($connection, $query);
+}
 // function insert_categories() {
 //     global $connection;
 //     if(isset($_POST['submit'])) {
